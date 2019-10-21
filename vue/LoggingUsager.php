@@ -39,19 +39,22 @@
                 </div>
             </div>
             <div class="card-body">
-                <form name="myForm" onsubmit="return validateForm()" method="post" action="Acceuil_dashboard.html">
+                <form name="myForm" onsubmit="return validateForm()" method="post" action="">
+                    <input type="hidden" name="action" value="connecter"/>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="username" id="username" name="fname">
-
+                        <input type="text" class="form-control" placeholder="cellulaire" id="cellulaire"
+                               name="fcellulaire">
+                        <span class="error"><?= ConnectUsager::getMessage("fcellulaire") ?></span>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
                         <input type="password" class="form-control" placeholder="password" name="fpwd">
+                        <span class="error"><?= ConnectUsager::getMessage("fpassword") ?></span>
                     </div>
 
                     <div id="message">

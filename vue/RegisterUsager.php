@@ -39,14 +39,16 @@
                 </div>
             </div>
             <div class="card-body">
-                <form name="myForm" onsubmit="return validateForm()" method="post" action="Acceuil_dashboard.html">
+                <form name="myForm" onsubmit="return validateForm()" method="post" action="">
+                    <input type="hidden" name="action" value="sinscrire"/>
+                    <input type="hidden" name="typecompte" value="3"/>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
                         <input type="text" class="form-control" placeholder="surname" id="surname" name="fsurname"
                                pattern="[a-zA-Z\s]{2,50}" required>
-
+                        <span class="error"><?= ConnectUsager::getMessage("fsurname") ?></span>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -54,37 +56,41 @@
                         </div>
                         <input type="text" class="form-control" placeholder="name" id="name" name="fname"
                                pattern="[a-zA-Z\s]{2,50}" required>
-
+                        <span class="error"><?= ConnectUsager::getMessage("fname") ?></span>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-envelope icon"></i></span>
                         </div>
                         <input type="email" class="form-control" placeholder="email" id="email" name="femail">
-
+                        <span class="error"><?= ConnectUsager::getMessage("femail") ?></span>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-envelope icon"></i></span>
                         </div>
-                        <input type="tel" class="form-control" placeholder="telephone" id="telephone" name="ftel">
-
+                        <input type="tel" class="form-control" placeholder="cellulaire" id="cellulaire"
+                               name="fcellulaire">
+                        <span class="error"><?= ConnectUsager::getMessage("fcellulaire") ?></span>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" class="form-control" placeholder="password" id="password" name="fpwd"
+                        <input type="password" class="form-control" placeholder="password" id="password"
+                               name="fpassword"
                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                                required>
+                        <span class="error"><?= ConnectUsager::getMessage("fpassword") ?></span>
                     </div>
 
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" class="form-control" placeholder="Repeat password" name="fpwd-repeat"
+                        <input type="password" class="form-control" placeholder="Repeat password"
+                               name="fpassword-repeat"
                                id="password-repeat" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                                required>
