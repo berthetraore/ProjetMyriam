@@ -3,7 +3,7 @@
 
 use Twilio\Rest\Client;
 
-class IdGenerator
+class myGenerator
 {
     private function __construct()
     {

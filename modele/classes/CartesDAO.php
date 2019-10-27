@@ -1,9 +1,9 @@
 <?php
 
-
+require_once 'Cartes.php';
 class CartesDAO
 {
-    public function createCarte(Cartes $carte)
+    public static function createCarte(Cartes $carte)
     {
         //etablir la connection
         $db = Database::getInstance();
@@ -35,7 +35,7 @@ class CartesDAO
      * @param $id
      * Rechercher une carte par son Id
      */
-    public function findCarteById($id = null)
+    public static function findCarteById($id = null)
     {
         $request = "";
         if ($id == NULL) {
@@ -72,7 +72,7 @@ class CartesDAO
 
     }
 
-    public function deleteCarte($carte)
+    public static function deleteCarte($carte)
     {
         $request = "DELETE FROM cartes where idCarte = :id";
         $db = Database::getInstance();

@@ -12,25 +12,10 @@ class ActionBuilder
                 return new LogoutAction();
                 break;
             case "sinscrire" :
-                return new DefaultAction();
-                break;
-            case "afficher" :
-                return new AfficherAction();
-                break;
-            case "inserer" :
-                return new AjouterAction();
-                break;
-            case "supp" :
-                return new SupprimerAction();
-                break;
-            case "sauver" :
-                return new SauverAction();
-                break;
-            case "edit" :
-                return new EditerAction();
+                return new RegisterAction();
                 break;
             default :
-                return new DefaultAction();
+                return new LoginAction();
         }
     }
 }

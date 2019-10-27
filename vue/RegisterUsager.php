@@ -1,10 +1,23 @@
 <?php
+require_once '../modele/ConnectUsager.php';
+
+if (!ISSET($_SESSION)) {
+    session_start();
+}
+$name = (ISSET($_REQUEST['fname'])) ? $_REQUEST['fname'] : "";
+$surname = (ISSET($_REQUEST['fsurname'])) ? $_REQUEST['fsurname'] : "";
+$email = (ISSET($_REQUEST['femail'])) ? $_REQUEST['femail'] : "";
+$cellulaire = (ISSET($_REQUEST['fcellulaire'])) ? $_REQUEST['fcellulaire'] : "";
+$password = (ISSET($_REQUEST['fpassword'])) ? $_REQUEST['fpassword'] : "";
+$password_repeat = (ISSET($_REQUEST['fpassword-repeat'])) ? $_REQUEST['fpassword-repeat'] : "";
+
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Register Page</title>
-    <!--Made with love by Mutiullah Samim -->
+    <!-- -->
     <!-- Google Font   -->
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
@@ -27,21 +40,21 @@
 <body>
 <div class="container">
     <div class="d-flex justify-content-center h-100">
-
-
         <div class="card">
             <div class="card-header">
-                <h3>Sign In</h3>
+                <h3>Creer un compte</h3>
                 <div class="d-flex justify-content-end social_icon">
                     <span><i class="fab fa-facebook-square"></i></span>
                     <span><i class="fab fa-google-plus-square"></i></span>
                     <span><i class="fab fa-twitter-square"></i></span>
                 </div>
             </div>
+
             <div class="card-body">
+
                 <form name="myForm" onsubmit="return validateForm()" method="post" action="">
                     <input type="hidden" name="action" value="sinscrire"/>
-                    <input type="hidden" name="typecompte" value="3"/>
+                    <input type="hidden" name="ftypecompte" value="3"/>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -67,7 +80,7 @@
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-envelope icon"></i></span>
+                            <span class="input-group-text"><i class="fa fa-mobile"></i></span>
                         </div>
                         <input type="tel" class="form-control" placeholder="cellulaire" id="cellulaire"
                                name="fcellulaire">
@@ -96,25 +109,20 @@
                                required>
                     </div>
 
-                    <div id="message">
-
-                    </div>
-
-                    <div class="row align-items-center remember">
-                        <input type="checkbox">Remember Me
+                    <div id="message"><span class="error"><?= ConnectUsager::getMessage("fcellulaire") ?></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Login" class="btn float-right login_btn" onclick="check()" ">
+                        <input type="submit" value="Valider" class="btn float-right login_btn" id="register"
+                               name="register">
                     </div>
                 </form>
+
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-center links">
-                    Don't have an account?<a href="#">Sign Up</a>
+
                 </div>
-                <div class="d-flex justify-content-center">
-                    <a href="#">Forgot your password?</a>
-                </div>
+
             </div>
         </div>
     </div>

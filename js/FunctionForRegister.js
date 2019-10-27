@@ -3,14 +3,14 @@ function validateForm() {
     var myInputSurname = document.getElementById("surname");
     var myInputName = document.getElementById("name");
     var myInputEmail = document.getElementById("email");
-    var myInputTelephone = document.getElementById("telephone");
+    var myInputCellulaire = document.getElementById("cellulaire");
     var myInputPassword = document.getElementById("password");
-    var myInputPasswordRepeat = document.getElementById("upassword-repeat");
+    var myInputPasswordRepeat = document.getElementById("password-repeat");
 
 
-    if (myInputSurname == "" || myInputName == "" || myInputEmail || myInputTelephone || myInputPassword || myInputPasswordRepeat) {
+    if (myInputSurname == "" || myInputName == "" || myInputEmail == "" || myInputCellulaire == "" || myInputPassword == "" || myInputPasswordRepeat == "") {
         msg.style.display = 'block';
-        msg.innerHTML = "<li>Veuillez remplir tout les champs</li>";
+        msg.innerHTML = "<li>Veuillez remplir tous les champs</li>";
         return false;
     } else {
         msg.style.display = 'none';

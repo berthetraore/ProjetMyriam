@@ -1,5 +1,5 @@
 <?php
-
+require_once 'MyGenerator.php';
 
 class Personnes
 {

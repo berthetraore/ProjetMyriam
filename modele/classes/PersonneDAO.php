@@ -1,6 +1,7 @@
 <?php
 
-
+require_once 'Personnes.php';
+require_once 'Database.php';
 class PersonneDAO
 {
     /***
@@ -45,10 +46,12 @@ class PersonneDAO
                 var_dump($typeCompte);
                 ContactsEntrsDAO::addContact($personneO->getId());
             }
+            //si c'est un usager le typecompe=3
             if ($typeCompte == 3) {
                 echo 'Hola type ' . $typeCompte;
                 var_dump($typeCompte);
-                UsagersDAO::createUsager($personneO->getId());
+                UsagersDAO::createUsager($personneO);
+                // UsagersDAO::createUsager($personneO->getIdPersonne());
             }
 
             ?>
@@ -123,6 +126,54 @@ class PersonneDAO
 
     }
 
+    /*
+     * Trouver une peronne par son cellulaire et par son password
+     * */
+    public static function findPersonnByCellPwd($cell, $password)
+    {
+        $request = "SELECT * FROM personnes WHERE numCell = :x AND password =:y";
+
+        $db = Database::getInstance();
+        try {
+
+            if (is_null($db)) {
+                throw new PDOException("Impossible d'effectuer une requete de recherche verifier la connexion");
+            }
+            $pstmt = $db->prepare($request);
+            $pstmt->execute(array(':x' => $cell, ':y' => $password));
+            //$pstmt->execute(array(':y' => $password));
+            if ($result = $pstmt->fetch(PDO::FETCH_OBJ)) {
+                $usager = new Personnes();
+                $usager->setId($result->idPersonne);
+                $usager->setPrenom($result->prenom);
+                $usager->setNom($result->nom);
+                $usager->setNumCell($result->numCell);
+                $usager->setMail($result->mail);
+                $usager->setPassword($result->password);
+                $usager->setActived($result->actived);
+                $usager->setDateActivation($result->dateActivation);
+                $usager->setDateModification($result->dateModification);
+                $usager->setTypeCompte($result->typeCompte);
+
+                $pstmt->closeCursor();
+                return $usager;
+                ?>
+                <!-- Affichage du message d'erreur au console personne-->
+                <script>console.log("bienvenue:  <?= $usager->getNom()?>")</script>
+                <?php
+            }
+            $pstmt->closeCursor();
+            return NULL;
+
+        } catch (PDOException $exception) {
+            ?>
+            <!-- Affichage du message d'erreur au console personne-->
+            <script>console.log("Error findDAO:  <?= $exception->getMessage()?>")</script>
+            <?php
+        }
+
+
+    }
     /***
      * Methode permettant de supprimer un terminal, réserver au SyperAdmin
      * @param null $terminalObjet

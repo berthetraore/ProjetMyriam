@@ -1,17 +1,18 @@
 <?php
-
-
+require_once 'Database.php';
+require_once 'Usagers.php';
+require_once 'Personnes.php';
+require_once 'PersonneDAO.php';
 class UsagersDAO extends PersonneDaO
 {
     /**
      * creer un usager
      * @param $usager
      */
-    public static function createUsager($usager)
+    public static function createUsager(Usagers $usager)
     {
 
         $db = Database::getInstance();
-
 
         $request = "INSERT INTO usagers (idUsager) values (:id)";
 
@@ -25,7 +26,6 @@ class UsagersDAO extends PersonneDaO
             //Preparation de la requette SQL pour l'execution(Tableau)
             $pstm = $db->prepare($request);
 
-
             $pstm->bindValue(':id', $usager->getId());
 
             $pstm->execute();
@@ -36,7 +36,7 @@ class UsagersDAO extends PersonneDaO
 
 
             ?>
-            <script>console.log("Insertion complété de l'usager avec l'ID:   <?=$usager->getId()?>")</script>
+            <script>console.log("Insertion complété de l'usager avec l'ID:   <?=$usager->getNom()?>")</script>
             <?php
 
         } catch (PDOException $ex) {
@@ -48,7 +48,7 @@ class UsagersDAO extends PersonneDaO
 
     }
 
-    public static function findByCell($cell)
+    public static function findUsagerByCell($cell)
     {
         $request = "SELECT * FROM personnes WHERE numCell = :x AND typeCompte =3";
 

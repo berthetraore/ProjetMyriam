@@ -1,12 +1,12 @@
 <?php
 
-
+require_once '../config/Config.php';
 class Database
 {
     private static $instance = null;
 
     /*
-    * On le met en private pour eviter la cration de plusieur objet
+    * On le met en private pour eviter la creation de plusieurs objets
     */
     private function __construct()
     {
@@ -22,7 +22,8 @@ class Database
                 self::$instance = new PDO(
                     "mysql:host=" . Config::DB_HOST . ";dbname=" . Config::DB_NAME . "",
                     Config::DB_USER,
-                    Config::DB_PWD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                    Config::DB_PWD,
+                    array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             }
         } catch (PDOException $ex) {
             ?>

@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Cartes.php';
 
 class CarteUsagers extends Cartes
 {

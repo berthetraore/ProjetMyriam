@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Personnes.php';
 
 class Usagers extends Personnes
 {
@@ -16,7 +16,8 @@ class Usagers extends Personnes
 
     public function createNewUsager($prenom, $nom, $numCell, $email, $password)
     {
-        parent::createNewPersonWeb($prenom, $nom, $numCell, $email, $password, 3);
+        $typeCompte = 3;
+        parent::createNewPersonWeb($prenom, $nom, $numCell, $email, $password, $typeCompte);
 
     }
 

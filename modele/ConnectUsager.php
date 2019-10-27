@@ -43,7 +43,7 @@ class ConnectUsager
         $cellulaire = $_REQUEST['fcellulaire'];
         $password = $_REQUEST['fpassword'];
         $password2 = $_REQUEST['fpassword-repeat'];
-        $typeCompte = $REQUEST['ftypecompte'];
+        $typeCompte = $_REQUEST['ftypecompte'];
         $resultat = TRUE;
         if ($name == "") {
             $_REQUEST["messages"]["fname"] = "votre nom est obligatoire";
@@ -87,10 +87,11 @@ class ConnectUsager
             $resultat = FALSE;
         }
         if ($password != $password2) {
-            $_REQUEST["messages"]["fpassword"] = "Les mots de passe doivent être identiques";
+            $_REQUEST["messages"]["fpassword"] = "Les motsssssss de passe doivent être identiques";
             $resultat = FALSE;
         }
         if ($resultat) {
+
             $usager = new Personnes();
             $usager->setNom($name);
             $usager->setPrenom($surname);
@@ -99,7 +100,12 @@ class ConnectUsager
             $usager->setPassword($password);
             $usager->setTypeCompte($typeCompte);
             $dao = new PersonneDAO();
-            $dao->create($usager);
+            $usager = $dao->findUser($cellulaire);
+            if ($usager != NULL) {
+                $_REQUEST["messages"]["fcellulaire"] = "Cet usager existe deja";
+                $resultat = FALSE;
+            } else
+                $dao->create($usager);
         }
         return $resultat;
     }
