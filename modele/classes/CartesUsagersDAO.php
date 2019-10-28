@@ -90,9 +90,54 @@ class CartesUsagersDAO extends CartesDAO
 
     }
 
+
     /**
      * @param $id
-     * Rechercher les cartes D,m usager
+     * Rechercher les cartes de l'usager
+     **/
+    public static function findCarteUsagerById($idcarte = null)
+    {
+        $request = "";
+        $db = Database::getInstance();
+        $listeCartesUsager = array();
+
+        if ($idcarte == null)
+            $request = "SELECT * FROM Cartesusagers ";
+        else {
+            $request = "SELECT * FROM Cartesusagers WHERE idcarte =:x";
+        }
+
+        try {
+            if (is_null($db)) {
+                throw new PDOException("Impossible d'effectuer une requete de recherche verifier la connexion");
+            }
+            $pstmt = $db->prepare($request);
+            $pstmt->execute(array(':x' => $idcarte));
+            if ($result = $pstmt->fetch(PDO::FETCH_OBJ)) {
+                $carte = new CarteUsagers();
+                $carte->loadFromObject($result);
+                array_push($listeCartesUsager, $carte);
+                return $listeCartesUsager;
+            }
+            $pstmt->closeCursor();
+            $pstmt = NULL;
+            Database::close();
+            ?>
+            <script>console.log("carteTrouvé:   <?=count($listeCartesUsager)?>")</script>
+            <?php
+
+        } catch (PDOException $exception) {
+            $exception->getMessage();
+        }
+        return $listeCartesUsager;
+        ?>
+        <script>console.log("aucune carte Trouvé:   <?=count($listeCartesUsager)?>")</script>
+        <?php
+    }
+
+    /**
+     * @param $id
+     * Rechercher les cartes de l'usager
      **/
     public static function findCarteUsagerByUsager($usager)
     {

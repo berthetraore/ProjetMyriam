@@ -1,5 +1,6 @@
 <?php
 require_once 'Cartes.php';
+require_once 'MyGenerator.php';
 
 class CarteUsagers extends Cartes
 {
@@ -11,20 +12,25 @@ class CarteUsagers extends Cartes
      */
     public function __construct()
     {
+
     }
 
     public function createCarteClient($libelle)
     {
         parent::createCarte($libelle);
-        $this->activerCarte();
+        //$this->activerCarte();
+
     }
 
     public function activerCarte()
     {
         $today = MyGenerator::getDateNow();
-        $this->_statut = 1;
-        $this->_dateActivation = $today;
-        $this->_dateExpiration = MyGenerator::getDate2YearLater();
+        /* $this->_statut = 1;
+         $this->_dateActivation = $today;
+        $this->_dateExpiration = MyGenerator::getDate2YearLater();*/
+        $this->setStatut(1);
+        $this->setDateActivation($today);
+        $this->setDateExpiration(MyGenerator::getDate2YearLater());
     }
 
     public function loadFromArray($tableau)

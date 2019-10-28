@@ -2,7 +2,11 @@
 require_once 'Cartes.php';
 require_once 'CartesDAO.php';
 require_once 'CartesUsagersDAO.php';
-
+require_once 'Personnes.php';
+require_once 'PersonneDAO.php';
+require_once 'Usagers.php';
+require_once 'UsagersDAO.php';
+require_once 'CartesUsagersDAO.php';
 
 /****
  *--------------------------------------------------------------------------------------------------------------
@@ -76,4 +80,6 @@ if (empty($listeCartes)) {
     <script> console.log("la carte a éte supprimé avec succes <?= $listeCartes[0]->getIdCarte()?>")</script>
     <?php
 }
+
+
 ?>
